@@ -248,7 +248,7 @@ img {
 .detalle-producto{
   display: flex;
   gap: 2rem;
-  padding: 3rem, 2rem;
+  padding: 3rem 2rem;
   flex-wrap: wrap;
 }
 
