@@ -204,8 +204,71 @@ function inicializarValidacionLogin() {
   });
 }
 
+function inicializarValidacionContacto(){
+    const formulario = document.getElementById("form-contacto");
+    if(!formulario) return;
+
+    const campoNombre = document.getElementById("nombre");
+    const campoCorreo = document.getElementById("correo");
+    const campoComentario = document.getElementById("comentario");
+
+    campoNombre.addEventListener("blur", () => {
+        if(campoNombre.value.trim() === ""){
+            mostrarError("nombre", "Ingrese Nombre");
+        }else if(campoNombre.value.length > 100){
+            mostrarError("nombre", "Maximo 100 caracteres")
+        }else{
+            mostrarError("nombre", "");
+        }
+    });
+
+    campoCorreo.addEventListener("blur", () => {
+        if(campoCorreo.value.trim() === ""){
+            mostrarError("correo", "");
+        }else{
+            const resultado =validarCorreo(campoCorreo.value);
+            mostrarError("correo", resultado.mensaje);
+        }
+    });
+
+    campoComentario.addEventListener("blur", () => {
+    if (campoComentario.value.trim() === "") {
+      mostrarError("comentario", "El comentario es obligatorio.");
+    } else if (campoComentario.value.length > 500) {
+      mostrarError("comentario", "Máximo 500 caracteres.");
+    } else {
+      mostrarError("comentario", "");
+    }
+  });
+
+    formulario.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+
+        campoNombre.dispatchEvent(new Event("blur"));
+        campoCorreo.dispatchEvent(new Event("blur"));
+        campoComentario.dispatchEvent(new Event("blur"));
+
+        const nombreValido = campoNombre.value.trim() !== "" && campoNombre.value.length <= 100;
+        const correoValido = campoCorreo.value.trim() === "" || validarCorreo(campoCorreo.value).valido;
+        const comentarioValido = campoComentario.value.trim() !== "" && campoComentario.value.length <= 500;
+
+        const mensajeExito = document.getElementById("contacto-exito");
+
+        if(nombreValido && correoValido && comentarioValido){
+            mensajeExito.textContent = "¡Mensaje enviado!";
+            mensajeExito.classList.add("exito");
+            formulario.reset();
+        }else{
+            mensajeExito.textContent = "LLene los campos correctamente";
+            mensajeExito.classList.remove("exito");
+        }
+    });
+
+}
+
 // CARGA EL CONTENIDO EN LAS PAGINAS
 document.addEventListener("DOMContentLoaded", () => {
   inicializarValidacionRegistro();
   inicializarValidacionLogin();
+  inicializarValidacionContacto
 });

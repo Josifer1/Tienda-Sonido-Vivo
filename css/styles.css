@@ -383,3 +383,18 @@ img {
   color: var(--color-acento);
   font-weight: 500;
 }
+
+/*Contacto*/
+.campo textarea{
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.campo textarea:focus{
+  outline: none;
+  border-color: var(--color-acento);
+}
