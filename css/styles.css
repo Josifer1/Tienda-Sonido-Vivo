@@ -291,3 +291,95 @@ img {
   color: #777;
   margin-bottom: 1.5rem;
 }
+
+/*FORMULARIOS*/
+.form-section {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.formulario {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+.formulario h1 {
+  color: var(--color-primario);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.campo {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.campo input,
+.campo select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: none;
+  border-color: var(--color-acento);
+}
+
+.input-invalido {
+  border-color: #e94560 !important;
+  background-color: #fff5f6;
+}
+
+.error-mensaje {
+  color: #e94560;
+  font-size: 0.8rem;
+  min-height: 1rem;
+  margin-top: 0.2rem;
+}
+
+.campo-doble {
+  display: flex;
+  gap: 1rem;
+}
+
+.campo-doble .campo {
+  flex: 1;
+}
+
+.form-exito {
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #e94560;
+}
+
+.form-exito.exito {
+  color: #2e7d32;
+}
+
+/*Registro*/
+.form-enlace{
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.form-enlace a{
+  color: var(--color-acento);
+  font-weight: 500;
+}
