@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro || Sonido VIVO</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header class="header-index">
+        <a href="index.html">SONIDO VIVO</a>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="header-acciones">
+            <a href="login.html">Iniciar Sesión</a>
+            <a href="registro.html">Registrarse</a>
+            <a href="#" class="carrito-link">Carrito(<span id="carrito-count">0</span>)</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <form id="form-registro" class="formulario" novalidate>
+                <h1>Registro de usuario</h1>
+
+                <div class="campo">
+                    <label for="run">RUN (sin puntos ni guion)</label>
+                    <input type="text" id="run" name="run" placeholder="19201411K">
+                    <span class="error-mensaje" id="error-run"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre">
+                    <span class="error-mensaje" id="error-nombre"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="apellidos">Apellido</label>
+                    <input type="text" id="apellidos" name="apellidos">
+                    <span class="error-mensaje" id="error-apellidos"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="correo">Correo electronico</label>
+                    <input type="email" id="correo" name="correo">
+                    <span class="error-mensaje" id="error-correo"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password">
+                    <span class="error-mensaje" id="error-password"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="password-confirm">Confirmar Contraseña</label>
+                    <input type="password" id="password-confirm" name="password-confirm">
+                    <span class="error-mensaje" id="error-password-confirm"></span>
+                </div>
+
+                <div class="campo-dobñe">
+                    <div class="campo">
+                        <label for="region">Region</label>
+                        <select id="region" name="region">
+                            <option value="">Region</option>
+                        </select>
+                        <span class="error-mensaje" id="error-region"></span>
+                    </div>
+                    <div class="campo">
+                        <label for="comuna">Comuna</label>
+                        <select id="comuna" name="comuna">
+                            <option value="">Comuna</option>
+                        </select>
+                        <span class="error-mensaje" id="error-comuna"></span>
+                    </div>
+                </div>
+                <div class="campo">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion">
+                    <span class="error-mensaje" id="error-direccion"></span>
+                </div>
+                <button type="submit" class="btn-primary">Registrar</button>
+                <p class="form-exito" id="registro-exito"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>2026 Sonido Vivo. Todos los derechos reservados.</p>
+        <nav class="footer-nav">
+            <a href="nosotros.html">Nosotros</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+    </footer>
+
+    <script src="js/regiones.js"></script>
+    <script src="js/productos.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/validaciones.js"></script>
+
+</body>
+
+</html>
