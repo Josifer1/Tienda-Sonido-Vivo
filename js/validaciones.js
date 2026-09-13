@@ -1,4 +1,4 @@
-// Verfificar RUT
+// VALIDACIÓN DE RUN 
 function validarRun(run) {
   run = run.trim().toUpperCase();
 
@@ -13,7 +13,6 @@ function validarRun(run) {
     return { valido: false, mensaje: "El RUN solo debe contener números y el dígito verificador." };
   }
 
-  // Cálculo del dígito verificador
   let suma = 0;
   let multiplicador = 2;
   for (let i = cuerpo.length - 1; i >= 0; i--) {
@@ -30,7 +29,7 @@ function validarRun(run) {
   return { valido: true, mensaje: "" };
 }
 
-// verfificar email
+//VALIDACIÓN DE CORREO
 function validarCorreo(correo) {
   correo = correo.trim();
   const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
@@ -48,8 +47,9 @@ function validarCorreo(correo) {
   return { valido: true, mensaje: "" };
 }
 
-// Registro
-function validacionRegistro() {
+
+//VALIDACIONES DEL REGISTRO
+function inicializarValidacionRegistro() {
   const formulario = document.getElementById("form-registro");
   if (!formulario) return;
 
@@ -62,6 +62,11 @@ function validacionRegistro() {
   const campoRegion = document.getElementById("region");
   const campoComuna = document.getElementById("comuna");
   const campoDireccion = document.getElementById("direccion");
+
+  campoRun.addEventListener("blur", () => {
+    const resultado = validarRun(campoRun.value);
+    mostrarError("run", resultado.mensaje);
+  });
 
   campoNombre.addEventListener("blur", () => {
     if (campoNombre.value.trim() === "") {
@@ -122,7 +127,6 @@ function validacionRegistro() {
     }
   });
 
-  // Enviar formulario
   formulario.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
@@ -138,90 +142,10 @@ function validacionRegistro() {
       campoDireccion.value.trim() !== "" && campoDireccion.value.length <= 300
     ];
 
-    // Errorer
     [campoRun, campoNombre, campoApellidos, campoCorreo, campoPassword, campoPasswordConfirm, campoDireccion]
       .forEach(campo => campo.dispatchEvent(new Event("blur")));
     campoRegion.dispatchEvent(new Event("change"));
     campoComuna.dispatchEvent(new Event("change"));
-function validar(run){
-
-    run = run.toUpperCase();
-
-    if(run.length < 7 || run.length > 9){
-        return {valido: false, mensaje: "El RUN debe tener entre 7 y 9 caracteres."};
-    }
-    const cuerpo = run.slice(0, -1);
-    const dv = run.slice(-1);
-
-    if(!/^\d+$/.test(cuerpo)){
-        return {valido: false, mensaje: "El RUN debe contener solo números y el número dígito verificador"};
-    }
-
-    let suma = 0;
-    let multiplo = 2;
-    for(let i = cuerpo.length - 1; i >= 0; i--){
-        suma += parseInt(cuerpo[i]) * multiplo;
-        multiplo = multiplo === 7 ? 2 : multiplo + 1;
-    }
-    const resto = 11 - (suma % 11);
-    let dvEsperado = resto === 11 ? '0' : resto === 10 ? 'K' : String(resto);
-
-    if(dv !== dvEsperado){
-        return {valido: false, mensaje: "El RUN ingresado es invalido, Dígito verificador incorrecto"};   
-    }
-    return {valido: true, mensaje:""};   
-}
-
-function validarCorreo(correo) {
-    correo = correo.trim();
-    const dominiosPermitidos = ["@duocuc.cl", "@profesor.duocuc.cl", "@gmail.com"];
-
-    if(correo.length === 0){
-        return {valido: false, mensaje: "El correo es obligatorio"};
-    }
-    if(correo.length > 100){
-        return {valido: false, mensaje: "El correo no puede superar los 100 caracteres"}
-    }
-    
-    const dominioValido = dominiosPermitidos.some(dominio => correo.toLowerCase().endsWith(dominio));
-
-    if(!dominioValido){
-        return{valido: false, mensaje: "Solo se aceptan correos con  @duocuc.cl, @profesor.duocuc.cl y @gmail.com"};
-    }
-    return {valido: true, mensaje: ""}
-}
-
-function inicializarValidacionRegistro(){
-    const formulario = document.getElementById("form-registro")
-    if(!formulario) return;
-    
-    const run = document.getElementById("run");
-    const nombre = document.getElementById("nombre");
-    const apellido = document.getElementById("apellidos");
-    const correo = document.getElementById("correo");
-    const password = document.getElementById("password");
-    const passwordConfirm = document.getElementById("password-confirm");
-    const region = document.getElementById("region");
-    const comuna = document.getElementById("comuna");
-    const direccion = document.getElementById("direccion");
-}
-
-formulario.addEventListener("submit", (evento) =>{
-
-    evento.preventDefault();
-
-    const validaciones = [
-        validarRun(run.value).valido, nombre.value.trim() !== "" && nombre.value.length <= 50, apellido.value.trim()
-        !== "" && apellido.value.length <= 100, validarCorreo(correo.value).valido, password.value.length >= 4 && 
-        password.value.length <= 10, passwordConfirm.value === password.value, region.value !== "", comuna.value !== "",
-        direccion.value.trim() !== "" && direccion.value.length <= 300
-    ];
-
-    [run, nombre, apellido, correo, password, passwordConfirm, direccion]
-
-    .forEach(campo => campo.dispatchEvent(new Event("blur")));
-    comuna.dispatchEvent(new Event("change"));
-    region.dispatchEvent(new Event("change"));
 
     const formularioValido = validaciones.every(v => v === true);
     const mensajeExito = document.getElementById("registro-exito");
@@ -230,7 +154,7 @@ formulario.addEventListener("submit", (evento) =>{
       mensajeExito.textContent = "¡Registro exitoso! Bienvenido/a a Sonido Vivo.";
       mensajeExito.classList.add("exito");
       formulario.reset();
-      cargarComunas(); 
+      cargarComunas();
     } else {
       mensajeExito.textContent = "Por favor corrige los errores marcados antes de continuar.";
       mensajeExito.classList.remove("exito");
@@ -238,64 +162,50 @@ formulario.addEventListener("submit", (evento) =>{
   });
 }
 
-//Login
-function validacionLogin(){
-    const formulario = document.getElementById(form-login);
-    if(!formulario) return;
+//VALIDACIONES DEL INICIO DE SESSION
+function inicializarValidacionLogin() {
+  const formulario = document.getElementById("form-login");
+  if (!formulario) return;
 
-    const valorCorreo = document.getElementById("correo");
-    const valorPassword = document.getElementById("password");
+  const campoCorreo = document.getElementById("correo");
+  const campoPassword = document.getElementById("password");
 
-    valorCorreo.addEventListener("blur", () => {
-        const resultado = validarCorreo(valorCorreo.value);
-        mostrarError("correo", resultado.mensaje);
-    });
+  campoCorreo.addEventListener("blur", () => {
+    const resultado = validarCorreo(campoCorreo.value);
+    mostrarError("correo", resultado.mensaje);
+  });
 
-    valorPassword.addEventListener("blur", () => {
-        if(valorPassword.value.length < 4 || valorPassword.value.length > 10){
-            mostrarError("password", "LA CONSTRASEÑA ENTRE 4 Y 10 CARACTERES")
-        }else{
-            mostrarError("password", "");
-        }
-    });
-
-    formulario.addEventListener("submit", (evento) => {
-        evento.preventDefault();
-
-        valorCorreo.dispatchEvent(new Event("blur"));
-        valorPassword.dispatchEvent(new Event("blur"));
-
-        const correoValido = validarCorreo(valorCorreo.value).valido;
-        const contraseñaValida = valorPassword.value.length >= 4 && valorPassword.valorPassword.length <= 10;
-    
-        const mensajeExito = document.getElementById("login-exito");
-
-        if(correoValido && contraseñaValida){
-            mensajeExito.textContent = "¡Inicio de sesion Exitoso!"
-            mensajeExito.classList.add("exito");
-        }else{
-            mensajeExito.textContent = "Correo o Contraseña invlida"
-            mensajeExito.classList.remove("exito");
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-        validacionRegistro();
-        validacionLogin();
-    })
-}
-    if(formularioValido){
-
-        mensajeExito.textContent = "¡Registro Exitoso!";
-        mensajeExito.classList.add("exito");
-
-        formulario.reset();
-
-        //cargarComunas();
-    }else{
-        mensajeExito.textContent = "Error, corrigir los error marcador antes de continuar";
-        mensajeExito.classList.remove("exito");
+  campoPassword.addEventListener("blur", () => {
+    if (campoPassword.value.length < 4 || campoPassword.value.length > 10) {
+      mostrarError("password", "La contraseña debe tener entre 4 y 10 caracteres.");
+    } else {
+      mostrarError("password", "");
     }
-});
+  });
 
-document.addEventListener("DOMContentLoaded", inicializarValidacionRegistro);
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    campoCorreo.dispatchEvent(new Event("blur"));
+    campoPassword.dispatchEvent(new Event("blur"));
+
+    const correoValido = validarCorreo(campoCorreo.value).valido;
+    const passwordValida = campoPassword.value.length >= 4 && campoPassword.value.length <= 10;
+
+    const mensajeExito = document.getElementById("login-exito");
+
+    if (correoValido && passwordValida) {
+      mensajeExito.textContent = "¡Inicio de sesión exitoso!";
+      mensajeExito.classList.add("exito");
+    } else {
+      mensajeExito.textContent = "Correo o contraseña inválidos. Revisa los campos.";
+      mensajeExito.classList.remove("exito");
+    }
+  });
+}
+
+// CARGA EL CONTENIDO EN LAS PAGINAS
+document.addEventListener("DOMContentLoaded", () => {
+  inicializarValidacionRegistro();
+  inicializarValidacionLogin();
+});
