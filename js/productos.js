@@ -18,7 +18,7 @@ function formatearPrecio(valor) {
 
 function renderizarProductos(listaProductos, contenedorId) {
 
-    const contenedor = document.getElementById("productos-container");
+    const contenedor = document.getElementById(contenedorId);
 
     if (!contenedor) return;
 
@@ -26,7 +26,7 @@ function renderizarProductos(listaProductos, contenedorId) {
 
     listaProductos.forEach(producto => {
         const articulo = document.createElement("article");
-        articulo.className = "producto-article";
+        articulo.className = "product-article";
         articulo.innerHTML = `<img src="${producto.imagen}" alt="${producto.nombre} ${producto.marca}">
          <h3>${producto.nombre}</h3>
          <p class="brand">${producto.marca} ${producto.modelo}</p>

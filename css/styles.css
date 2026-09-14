@@ -402,7 +402,7 @@ img {
 /*NOSOTROS*/
 .nosotros-hero{
   text-align: center;
-  padding: 3rem 2 rem;
+  padding: 3rem 2rem;
   background-color: var(--color-claro);
 }
 
@@ -503,13 +503,9 @@ img {
 
 
 
-
-
-
-
-
-
-
-
-
+@media (max-width: 480px) {
+  .campo-doble {
+    flex-direction: column;
+  }
+}
 

@@ -266,9 +266,17 @@ function inicializarValidacionContacto(){
 
 }
 
+//MOSTRAR ERRORES EN PANTALLA
+function mostrarError(idInput, mensaje) {
+  const input = document.getElementById(idInput);
+  const spanError = document.getElementById("error-" + idInput);
+  if (spanError) spanError.textContent = mensaje;
+  if (input) input.classList.toggle("input-invalido", mensaje !== "");
+}
+
 // CARGA EL CONTENIDO EN LAS PAGINAS
 document.addEventListener("DOMContentLoaded", () => {
   inicializarValidacionRegistro();
   inicializarValidacionLogin();
-  inicializarValidacionContacto
+  inicializarValidacionContacto();
 });
